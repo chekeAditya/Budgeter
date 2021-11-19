@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    tools:context=".ui.activities.AddEditItemActivity"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/light_blue">
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add/Edit"
+            android:drawableStart="@drawable/back_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="@font/poppins_semibold"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:drawablePadding="10dp"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:background="@drawable/bg_rectangular"
+        android:padding="10dp"
+        android:fontFamily="@font/amethysta"
+        android:inputType="numberDecimal"
+        android:id="@+id/etAmount"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="10"
+        android:hint="Amount"
+        android:layout_marginHorizontal="10dp"/>
+
+    <EditText
+        android:background="@drawable/bg_rectangular"
+        android:padding="10dp"
+        android:id="@+id/etDescription"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/amethysta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="50"
+        android:hint="Description"
+        android:layout_marginHorizontal="10dp"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvDate"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_blue"
+        android:text="dd/MM/yyyy"
+        android:padding="10dp"
+        android:fontFamily="@font/amethysta"
+        android:textSize="15sp"
+        android:layout_margin="10dp"/>
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:fontFamily="@font/poppins_semibold"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Submit"
+        android:background="@color/light_blue"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
