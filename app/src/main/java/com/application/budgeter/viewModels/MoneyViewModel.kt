@@ -2,13 +2,13 @@ package com.application.budgeter.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.application.budgeter.remote.responses.Money
+import com.application.budgeter.local.responses.Money
 import com.application.budgeter.repository.MoneyRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MoneyViewModel @Inject constructor(val repo: MoneyRepo): ViewModel() {
+class MoneyViewModel @Inject constructor(private val repo: MoneyRepo): ViewModel() {
 
     fun addMoney(money: Money){
         repo.addMoneyToRoom(money)

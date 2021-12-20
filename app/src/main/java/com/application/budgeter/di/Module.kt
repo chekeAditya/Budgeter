@@ -2,8 +2,8 @@ package com.application.budgeter.di
 
 import android.content.Context
 import androidx.room.Room
-import com.application.budgeter.remote.db.MoneyDAO
-import com.application.budgeter.remote.db.MoneyDatabase
+import com.application.budgeter.local.db.MoneyDAO
+import com.application.budgeter.local.db.MoneyDatabase
 import com.application.budgeter.repository.MoneyRepo
 import dagger.Module
 import dagger.Provides
@@ -28,5 +28,4 @@ object Module {
     fun getRepo(moneyDAO: MoneyDAO): MoneyRepo {
         return MoneyRepo(moneyDAO)
     }
-
 }

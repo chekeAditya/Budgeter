@@ -24,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    suspend fun splash(){
+    private suspend fun splash(){
         delay(2000)
         startActivity(Intent(this,MainActivity::class.java))
         finish()

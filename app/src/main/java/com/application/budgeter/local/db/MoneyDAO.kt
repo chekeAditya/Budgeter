@@ -1,14 +1,14 @@
-package com.application.budgeter.remote.db
+package com.application.budgeter.local.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.application.budgeter.remote.responses.Money
+import com.application.budgeter.local.responses.Money
 
 @Dao
 interface MoneyDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(money: Money)
+    suspend fun insert(money: Money)
 
     @Update
     fun update(money: Money)

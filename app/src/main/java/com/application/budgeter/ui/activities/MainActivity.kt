@@ -22,15 +22,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewPager.adapter = FragmentAdapter(supportFragmentManager,lifecycle)
-        TabLayoutMediator(tabLayout,viewPager,object : TabLayoutMediator.TabConfigurationStrategy{
-            override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                when(position){
-                    0 -> tab.text = "Income"
-                    1 -> tab.text = "Expense"
-                    2 -> tab.text = "Balance"
-                }
+        TabLayoutMediator(tabLayout,viewPager) { tab, position ->
+            when (position) {
+                0 -> tab.text = "Income"
+                1 -> tab.text = "Expense"
+                2 -> tab.text = "Balance"
             }
-        }).attach()
+        }.attach()
 
     }
 }

@@ -1,4 +1,4 @@
-package com.application.budgeter.remote.responses
+package com.application.budgeter.local.responses
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -12,6 +12,5 @@ data class Money(@ColumnInfo(name = "category") var category: String,
                  @ColumnInfo(name = "date") var date: String): Serializable {
 
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "id") var id: Int? = null
-
 
 }

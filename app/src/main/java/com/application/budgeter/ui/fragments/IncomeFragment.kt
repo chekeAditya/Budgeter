@@ -10,13 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.budgeter.R
-import com.application.budgeter.remote.responses.Money
+import com.application.budgeter.local.responses.Money
 import com.application.budgeter.ui.activities.AddEditItemActivity
 import com.application.budgeter.viewModels.MoneyViewModel
 import com.application.budgeter.ui.adapters.MoneyAdapter
 import com.application.budgeter.ui.adapters.OnMoneyItemClicked
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_expense.*
 import kotlinx.android.synthetic.main.fragment_income.*
 
 @AndroidEntryPoint
@@ -34,8 +33,6 @@ class IncomeFragment : Fragment(R.layout.fragment_income), OnMoneyItemClicked {
         getDataFromDB()
     }
 
-    /* Continuously observing live data from room database and showing it on recycler view */
-
     private fun getDataFromDB() {
         moneyViewModel.getAllMoney("Income").observe(viewLifecycleOwner, Observer {
             listMoney.clear()
@@ -43,9 +40,6 @@ class IncomeFragment : Fragment(R.layout.fragment_income), OnMoneyItemClicked {
             recyclerViewIncome.adapter?.notifyDataSetChanged()
         })
     }
-
-    /* On click of any item in the recycler view showing custom alert dialog box in which asking for
-    * edition or deletion of particular item */
 
     override fun onClick(money: Money) {
         val alertDialog = AlertDialog.Builder(context).create()

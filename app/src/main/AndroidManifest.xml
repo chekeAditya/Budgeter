@@ -3,7 +3,7 @@
     package="com.application.budgeter">
 
     <application
-android:name=".budgeterApp.MoneyApplication"
+        android:name=".budgeterApp.MoneyApplication"
         android:allowBackup="true"
         android:icon="@drawable/budgeter"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@ android:name=".budgeterApp.MoneyApplication"
             android:exported="false" />
         <activity
             android:name=".ui.activities.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,8 +26,7 @@ android:name=".budgeterApp.MoneyApplication"
         </activity>
         <activity
             android:name=".ui.activities.MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"/>
 
         <meta-data
             android:name="preloaded_fonts"

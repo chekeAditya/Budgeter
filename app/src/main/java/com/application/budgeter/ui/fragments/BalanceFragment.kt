@@ -1,16 +1,12 @@
 package com.application.budgeter.ui.fragments
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.application.budgeter.R
-import com.application.budgeter.remote.responses.Money
-import com.application.budgeter.ui.activities.AddEditItemActivity
+import com.application.budgeter.local.responses.Money
 import com.application.budgeter.viewModels.MoneyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_balance.*
@@ -35,61 +31,55 @@ class BalanceFragment : Fragment(R.layout.fragment_balance) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        fetchDataFromDB()
+        startDateClicked()
+        endDatePickedClicked()
         datePickerDialog()
+        goButtonClicked()
+    }
 
-
-        setData()
-
-        // Showing date picker calendar to enter particular date on click of start date text.
-
-        tvStartDate.setOnClickListener {
-            val mYear = cal.get(Calendar.YEAR)
-            val mMonth = cal.get(Calendar.MONTH)
-            val mDay = cal.get(Calendar.DAY_OF_MONTH)
-            DatePickerDialog(requireContext(),datePickerStart,mYear,mMonth,mDay).show()
-        }
-
-        // Showing date picker calendar to enter particular date on click of end date text.
-
-        tvEndDate.setOnClickListener {
-            val mYear = cal.get(Calendar.YEAR)
-            val mMonth = cal.get(Calendar.MONTH)
-            val mDay = cal.get(Calendar.DAY_OF_MONTH)
-            DatePickerDialog(requireContext(),datePickerEnd,mYear,mMonth,mDay).show()
-        }
-
-        /* On click of go button categorise the total amount of income and expense list data
-        * according to user entered start and end date, and then showing the data on ui. */
-
+    private fun goButtonClicked() {
         btnGo.setOnClickListener {
             cvOverAllBalance.visibility = View.VISIBLE
             totalIncome = 0F
             totalExpense = 0F
-            var dateStart = dateFormat.parse(tvStartDate.text.toString())
-            var dateEnd =  dateFormat.parse(tvEndDate.text.toString())
-            for (i in listIncome){
-                var dateCheck = dateFormat.parse(i.date)
-                if (dateCheck.compareTo(dateStart) >= 0 && dateCheck.compareTo(dateEnd) <= 0)
+            val dateStart = dateFormat.parse(tvStartDate.text.toString())
+            val dateEnd = dateFormat.parse(tvEndDate.text.toString())
+            for (i in listIncome) {
+                val dateCheck = dateFormat.parse(i.date)
+                if (dateCheck >= dateStart && dateCheck <= dateEnd)
                     totalIncome += i.amount
             }
-            for (i in listExpense){
-                var dateCheck = dateFormat.parse(i.date)
-                if (dateCheck.compareTo(dateStart) >= 0 && dateCheck.compareTo(dateEnd) <= 0)
+            for (i in listExpense) {
+                val dateCheck = dateFormat.parse(i.date)
+                if (dateCheck >= dateStart && dateCheck <= dateEnd)
                     totalExpense += i.amount
             }
-            tvIncomeC.text = "Income:     $totalIncome"
-            tvExpenseC.text = "Expense:   $totalExpense"
-            tvTotalC.text = "Total:         ${totalIncome-totalExpense}"
+            tvIncomeC.text = "Income: $totalIncome"
+            tvExpenseC.text = "Expense: $totalExpense"
+            tvTotalC.text = "Total: ${totalIncome - totalExpense}"
         }
-
     }
 
-    /* Setting total income and expense data and showing it on the ui by fetching all data
-    * from room database. */
+    private fun endDatePickedClicked() {
+        tvEndDate.setOnClickListener {
+            val mYear = cal.get(Calendar.YEAR)
+            val mMonth = cal.get(Calendar.MONTH)
+            val mDay = cal.get(Calendar.DAY_OF_MONTH)
+            DatePickerDialog(requireContext(), datePickerEnd, mYear, mMonth, mDay).show()
+        }
+    }
 
-    private fun setData() {
+    private fun startDateClicked() {
+        tvStartDate.setOnClickListener {
+            val mYear = cal.get(Calendar.YEAR)
+            val mMonth = cal.get(Calendar.MONTH)
+            val mDay = cal.get(Calendar.DAY_OF_MONTH)
+            DatePickerDialog(requireContext(), datePickerStart, mYear, mMonth, mDay).show()
+        }
+    }
 
+    private fun fetchDataFromDB() {
         tvStartDate.text = dateFormat.format(cal.time).toString()
         tvEndDate.text = dateFormat.format(cal.time).toString()
 
@@ -109,7 +99,7 @@ class BalanceFragment : Fragment(R.layout.fragment_balance) {
 
     }
 
-    private fun updateTotalBalance(){
+    private fun updateTotalBalance() {
         totalIncome = 0F
         totalExpense = 0F
         for (i in listIncome)
@@ -119,23 +109,21 @@ class BalanceFragment : Fragment(R.layout.fragment_balance) {
 
         tvIncome.text = "Income:     $totalIncome"
         tvExpense.text = "Expense:   $totalExpense"
-        tvTotal.text = "Total:         ${totalIncome-totalExpense}"
+        tvTotal.text = "Total:         ${totalIncome - totalExpense}"
     }
 
     private fun datePickerDialog() {
         datePickerStart = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            cal.set(Calendar.YEAR,year)
-            cal.set(Calendar.MONTH,month)
-            cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             tvStartDate.text = dateFormat.format(cal.time).toString()
         }
         datePickerEnd = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            cal.set(Calendar.YEAR,year)
-            cal.set(Calendar.MONTH,month)
-            cal.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, month)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
             tvEndDate.text = dateFormat.format(cal.time).toString()
         }
     }
-
-
 }

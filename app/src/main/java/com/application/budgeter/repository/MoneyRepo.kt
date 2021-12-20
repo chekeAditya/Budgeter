@@ -1,8 +1,8 @@
 package com.application.budgeter.repository
 
 import androidx.lifecycle.LiveData
-import com.application.budgeter.remote.db.MoneyDAO
-import com.application.budgeter.remote.responses.Money
+import com.application.budgeter.local.db.MoneyDAO
+import com.application.budgeter.local.responses.Money
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
